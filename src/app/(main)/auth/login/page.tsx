@@ -1,14 +1,15 @@
 import { Command } from "lucide-react";
 import type { Metadata } from "next";
 
+import env from "@/config/env-config";
+
 import { LoginForm } from "./_components/login-form";
 
 export const metadata: Metadata = {
-  title: "Open Source Split Screen Login Page with shadcn/ui",
-  description:
-    "Explore an open source split screen login page with email and password fields, social sign-in, and a registration link.",
+  title: `${env.appName} Dashboard | Login`,
+  description: "Manage movies and others",
   alternates: {
-    canonical: "/auth/v1/login",
+    canonical: "/auth/login",
   },
 };
 
@@ -20,9 +21,7 @@ export default function Login() {
           <div className="space-y-6">
             <Command className="mx-auto size-12 text-primary-foreground" />
             <div className="space-y-2">
-              <p className="text-primary-foreground/80 text-xl">
-                T Movie Admin Portal
-              </p>
+              <p className="text-primary-foreground/80 text-xl">{env.appName} Admin Portal</p>
             </div>
           </div>
         </div>

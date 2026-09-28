@@ -1,9 +1,11 @@
+import { permanentRedirect } from "next/navigation";
+
 import type { Metadata } from "next";
 
-import styles from "./landing.module.css";
+import env from "@/config/env-config";
 
 export const metadata: Metadata = {
-  title: "T Movie Dashboard",
+  title: `${env.appName} Dashboard`,
   description: "Manage movies and others",
   alternates: {
     canonical: "/",
@@ -11,14 +13,5 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return (
-    <main
-      className={`${styles.landing} min-h-screen bg-background text-foreground`}
-      data-landing-page
-    >
-      <div className="py-10 text-center font-semibold">
-        Manage Authentication
-      </div>
-    </main>
-  );
+  return permanentRedirect("/auth/login");
 }

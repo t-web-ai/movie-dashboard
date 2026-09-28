@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
 
 import { cn } from "cn";
-import { BadgeCheck, Check, LogOut } from "lucide-react";
+import { BadgeCheck, LogOut } from "lucide-react";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,70 +14,36 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useAuthManagement } from "@/hooks/auth/use-auth-management";
+import { useAuthStore } from "@/hooks/auth/use-auth-store";
 import { getInitials } from "@/lib/utils";
-import Link from "next/link";
 
-export function AccountSwitcher({
-  users,
-}: {
-  readonly users: ReadonlyArray<{
-    readonly id: string;
-    readonly name: string;
-    readonly email: string;
-    readonly avatar: string;
-    readonly role: string;
-  }>;
-}) {
-  const [activeUser, setActiveUser] = useState(users[0]);
+export function AccountSwitcher() {
+  const { admin } = useAuthStore();
+  const { logoutAdmin } = useAuthManagement();
 
-  if (!activeUser) {
-    return null;
-  }
+  if (!admin) return <Skeleton className="size-8 rounded-full" />;
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="size-8 rounded-lg">
-          <AvatarImage
-            src={activeUser.avatar || undefined}
-            alt={activeUser.name}
-          />
-          <AvatarFallback>{getInitials(activeUser.name)}</AvatarFallback>
+          <AvatarFallback>{getInitials(admin.name)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent
-        className="min-w-56 space-y-1 rounded-lg"
-        side="bottom"
-        align="end"
-        sideOffset={4}
-      >
-        {users.map((user) => (
-          <DropdownMenuItem
-            key={user.email}
-            className={cn("p-0", user.id === activeUser.id && "bg-accent/50")}
-            aria-current={user.id === activeUser.id ? "true" : undefined}
-            onClick={() => setActiveUser(user)}
-          >
-            <div className="flex w-full items-center gap-2 px-1 py-1.5">
-              <Avatar className="size-9 rounded-lg">
-                <AvatarImage src={user.avatar || undefined} alt={user.name} />
-                <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
-              </Avatar>
-              <div className="grid min-w-0 flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{user.name}</span>
-                <span className="truncate text-xs capitalize">{user.role}</span>
-              </div>
-              <span
-                className={cn(
-                  "mr-1 flex size-5 items-center justify-center rounded-full text-primary opacity-0",
-                  user.id === activeUser.id && "opacity-100",
-                )}
-              >
-                <Check aria-hidden="true" />
-              </span>
+      <DropdownMenuContent className="min-w-56 space-y-1 rounded-lg" side="bottom" align="end" sideOffset={4}>
+        <DropdownMenuItem key={admin.email} className={cn("p-0")}>
+          <div className="flex w-full items-center gap-2 px-1 py-1.5">
+            <Avatar className="size-9 rounded-lg">
+              <AvatarFallback>{getInitials(admin.name)}</AvatarFallback>
+            </Avatar>
+            <div className="grid min-w-0 flex-1 text-left text-sm leading-tight">
+              <span className="truncate font-semibold">{admin.name}</span>
+              <span className="truncate text-xs capitalize">{admin.role.name}</span>
             </div>
-          </DropdownMenuItem>
-        ))}
+          </div>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <Link href={"/dashboard/setting/profile"}>
@@ -88,7 +54,7 @@ export function AccountSwitcher({
           </Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={logoutAdmin}>
           <LogOut />
           Log out
         </DropdownMenuItem>

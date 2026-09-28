@@ -1,33 +1,29 @@
 import type { ReactNode } from "react";
 
 import { cookies } from "next/headers";
+import { permanentRedirect } from "next/navigation";
 
 import { cn } from "cn";
 
 import { AppSidebar } from "@/app/(main)/dashboard/_components/sidebar/app-sidebar";
-import { Separator } from "@/components/ui/separator";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
-import { users } from "@/data/users";
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { getPreference } from "@/server/server-actions";
+import { AuthInitializer } from "@/stores/auth/auth-intializer";
 
 import { AccountSwitcher } from "./_components/header/account-switcher";
 import { LayoutControls } from "./_components/header/layout-controls";
-import { SearchDialog } from "./_components/header/search-dialog";
 import { ThemeSwitcher } from "./_components/header/theme-switcher";
 
-export default async function Layout({
-  children,
-}: Readonly<{ children: ReactNode }>) {
+export default async function Layout({ children }: Readonly<{ children: ReactNode }>) {
   const cookieStore = await cookies();
   const defaultOpen = cookieStore.get("sidebar_state")?.value !== "false";
   const [variant, collapsible] = await Promise.all([
     getPreference("sidebar_variant"),
     getPreference("sidebar_collapsible"),
   ]);
+
+  const token = cookieStore.get("token");
+  if (!token) permanentRedirect("/auth/login");
 
   return (
     <SidebarProvider
@@ -38,6 +34,7 @@ export default async function Layout({
         } as React.CSSProperties
       }
     >
+      <AuthInitializer />
       <AppSidebar variant={variant} collapsible={collapsible} />
       <SidebarInset
         className={cn(
@@ -59,16 +56,11 @@ export default async function Layout({
           <div className="flex w-full items-center justify-between px-4 lg:px-6">
             <div className="flex items-center gap-1 lg:gap-2">
               <SidebarTrigger className="-ml-1" />
-              <Separator
-                orientation="vertical"
-                className="mx-2 data-[orientation=vertical]:h-4 data-[orientation=vertical]:self-center"
-              />
-              <SearchDialog />
             </div>
             <div className="flex items-center gap-2">
               <LayoutControls />
               <ThemeSwitcher />
-              <AccountSwitcher users={users} />
+              <AccountSwitcher />
             </div>
           </div>
         </header>

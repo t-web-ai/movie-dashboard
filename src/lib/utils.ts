@@ -5,6 +5,7 @@ export const getInitials = (str: string): string => {
     str
       .trim()
       .split(/\s+/)
+      .splice(0, 1)
       .filter(Boolean)
       .map((word) => word[0])
       .join("")

@@ -1,9 +1,4 @@
-import {
-  LayoutDashboard,
-  type LucideIcon,
-  Settings,
-  Users,
-} from "lucide-react";
+import { LayoutDashboard, type LucideIcon, Settings, Users } from "lucide-react";
 
 export type NavBadge = "new" | "soon";
 
