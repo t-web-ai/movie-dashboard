@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
+import { useCheckPermission } from "@/hooks/auth/use-check-permission";
 import { useGetAdminQuery } from "@/queries/admin/use-get-admin-query";
 import type { AdminUpdateInput } from "@/schemas/admin-schema";
 import type { Role } from "@/types/role";
@@ -24,6 +25,7 @@ interface AdminUpdateFormProps {
 }
 
 export function AdminUpdateForm({ onSubmit, form, roles, rolesResponseLoading, id }: AdminUpdateFormProps) {
+  const hasUpdatePermission = useCheckPermission("admin", "update");
   const {
     control,
     reset,
@@ -172,7 +174,7 @@ export function AdminUpdateForm({ onSubmit, form, roles, rolesResponseLoading, i
         </FieldGroup>
 
         <div className="flex justify-end">
-          <Button type="submit" className="h-10 min-w-40 font-medium" disabled={isSubmitting}>
+          <Button type="submit" className="h-10 min-w-40 font-medium" disabled={isSubmitting || !hasUpdatePermission}>
             {isSubmitting ? <Spinner /> : "Save Changes"}
           </Button>
         </div>

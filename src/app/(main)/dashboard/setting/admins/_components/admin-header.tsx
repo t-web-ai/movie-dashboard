@@ -5,6 +5,7 @@ import { DateRangePicker } from "@/components/date-range-picker";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCheckPermission } from "@/hooks/auth/use-check-permission";
 import type { Role } from "@/types/role";
 
 import { Breadcrumb } from "../../../_components/header/breadcrumb";
@@ -44,12 +45,13 @@ export function AdminHeader({
   handleDate,
   openCreateAdminPage,
 }: AdminHeaderProps) {
+  const hasCreatePermission = useCheckPermission("admin", "create");
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-wrap items-center justify-between">
         <Breadcrumb items={["Setting"]} currentPage="Admin Management" />
         <div className="flex gap-2">
-          <Button onClick={openCreateAdminPage}>
+          <Button onClick={openCreateAdminPage} disabled={!hasCreatePermission}>
             Create New <Plus />
           </Button>
           <Button onClick={clearFilters} variant="secondary">

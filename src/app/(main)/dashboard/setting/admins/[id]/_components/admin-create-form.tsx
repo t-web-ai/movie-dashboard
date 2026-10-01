@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
+import { useCheckPermission } from "@/hooks/auth/use-check-permission";
 import type { AdminCreateInput } from "@/schemas/admin-schema";
 import type { Role } from "@/types/role";
 
@@ -20,6 +21,7 @@ interface AdminCreateFormProps {
 }
 
 export function AdminCreateForm({ onSubmit, form, roles, rolesResponseLoading }: AdminCreateFormProps) {
+  const hasCreatePermission = useCheckPermission("admin", "create");
   const {
     control,
     formState: { isSubmitting },
@@ -152,7 +154,7 @@ export function AdminCreateForm({ onSubmit, form, roles, rolesResponseLoading }:
         </FieldGroup>
 
         <div className="flex justify-end">
-          <Button type="submit" className="h-10 min-w-40 font-medium" disabled={isSubmitting}>
+          <Button type="submit" className="h-10 min-w-40 font-medium" disabled={isSubmitting || !hasCreatePermission}>
             {isSubmitting ? <Spinner /> : "Create Account"}
           </Button>
         </div>
