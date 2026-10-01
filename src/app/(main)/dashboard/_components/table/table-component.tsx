@@ -7,7 +7,7 @@ export interface TableColumn<T> {
 
 export interface TableComponentProps<T> {
   headers: TableColumn<T>[];
-  items: T[];
+  items?: T[];
 }
 
 export function TableComponent<T>({ headers, items }: TableComponentProps<T>) {
@@ -22,7 +22,7 @@ export function TableComponent<T>({ headers, items }: TableComponentProps<T>) {
       </TableHeader>
 
       <TableBody>
-        {items.map((item, index) => {
+        {items?.map((item, index) => {
           const key = `#${index}`;
           return (
             <TableRow key={key}>

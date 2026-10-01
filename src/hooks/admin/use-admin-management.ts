@@ -86,6 +86,7 @@ export function useAdminManagement() {
     setPage(1);
     setLimit(10);
     setSearch("");
+    setDeboundSearch("");
     setStatus("all");
     setRole("all");
     setCreatedAfter("");

@@ -52,7 +52,7 @@ export default function Page() {
     }
   }, [roles]);
 
-  if (!mounted || !admins)
+  if (!mounted)
     return (
       <div>
         <div className="my-2">
