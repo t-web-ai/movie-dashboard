@@ -1,9 +1,12 @@
 import z from "zod";
 
 const AdminBaseSchema = z.object({
-  name: z.string().trim().min(1),
+  name: z.string().trim().min(1, "Name must be at least one character"),
   email: z.email().trim(),
-  role: z.string().trim(),
+  role: z
+    .string()
+    .trim()
+    .refine((role) => Boolean(role), { message: "You need to choose a role" }),
   status: z.enum(["active", "suspend"]),
 });
 

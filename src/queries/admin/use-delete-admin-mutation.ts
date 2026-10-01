@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { updateAdmin } from "@/services/admin-service";
+import { deleteAdmin } from "@/services/admin-service";
 
-export function useUpdateAdminMutation() {
+export function useDeleteAdminMutation() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: updateAdmin,
+    mutationFn: deleteAdmin,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["admins"] });
     },

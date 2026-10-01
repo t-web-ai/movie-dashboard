@@ -1,10 +1,13 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { Check, X } from "lucide-react";
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAuthStore } from "@/hooks/auth/use-auth-store";
 import { usePermissionManagement } from "@/hooks/permission/use-permission-management";
+import { useGetRoleQuery } from "@/queries/role/use-get-role-query";
 
 type MappedPermission = {
   _id: string;
@@ -14,13 +17,20 @@ type MappedPermission = {
 };
 
 export function ProfileOverview() {
+  const [mounted, setMounted] = useState<boolean>(false);
   const { admin } = useAuthStore();
   const { permissions } = usePermissionManagement();
+  const { data: roleReponse, isLoading: roleResponseLoading } = useGetRoleQuery(admin?.role?._id);
 
-  if (!admin || !permissions) return <ProfileOverviewSkeleton />;
+  const adminPermissions = roleReponse?.data?.role?.permissions;
+  const adminPermissionIds = new Set(adminPermissions?.map((permission) => permission._id));
+  useEffect(() => {
+    if (admin && adminPermissionIds && adminPermissions && !roleResponseLoading) {
+      setMounted(true);
+    }
+  }, [admin, adminPermissionIds, adminPermissions, roleResponseLoading]);
 
-  const adminPermissions = admin?.role?.permissions ?? [];
-  const adminPermissionIds = new Set(adminPermissions.map((permission) => permission._id));
+  if (!permissions || !mounted) return <ProfileOverviewSkeleton />;
 
   const allPermissions: Partial<Record<string, MappedPermission[]>> = Object.groupBy(
     permissions.map(

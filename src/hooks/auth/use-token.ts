@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { jwtDecode } from "jwt-decode";
 
+import type { AdminAccountStatus } from "@/types/admin";
 import { getCookie } from "@/utils/cookie-util";
 
 type jwtToken = {
@@ -9,7 +10,7 @@ type jwtToken = {
   name: string;
   email: string;
   role: string;
-  status: "active" | "suspend";
+  status: AdminAccountStatus;
 };
 
 export function useToken() {

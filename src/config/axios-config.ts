@@ -1,5 +1,4 @@
 import axios, { type CreateAxiosDefaults, isAxiosError } from "axios";
-import { toast } from "sonner";
 
 import { getCookie } from "@/utils/cookie-util";
 
@@ -65,7 +64,7 @@ writeClient.interceptors.response.use(
   (error) => {
     if (isAxiosError(error)) {
       if (error.status === HttpStatus.UNAUTHORIZED) {
-        toast(error.message);
+        window.dispatchEvent(new Event("session-expired"));
       }
     }
     progressBar.done();

@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { updateAdmin } from "@/services/admin-service";
+import { createAdmin } from "@/services/admin-service";
 
-export function useUpdateAdminMutation() {
+export function useCreateAdminMutation() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: updateAdmin,
+    mutationFn: createAdmin,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["admins"] });
     },

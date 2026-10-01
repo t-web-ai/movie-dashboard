@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { isAxiosError } from "axios";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -23,8 +22,8 @@ import {
   type VerifyOTPInput,
   VerifyOTPSchema,
 } from "@/schemas/auth-schema";
-import type { ErrorResponse } from "@/types/response";
 import { removeCookie, setCookie } from "@/utils/cookie-util";
+import { handleResponseError } from "@/utils/handle-error-util";
 
 import { useAuthStore } from "./use-auth-store";
 import { useSessionStore } from "./use-session-store";
@@ -70,10 +69,7 @@ export function useAuthManagement() {
       router.replace("/dashboard");
       toast.success(response?.message || "Login successfully");
     } catch (error) {
-      console.error(error);
-      if (isAxiosError<ErrorResponse>(error)) {
-        toast.error(error.response?.data.details?.[0].message);
-      }
+      handleResponseError(error);
     }
   }
 
@@ -92,9 +88,7 @@ export function useAuthManagement() {
       router.replace("/dashboard/auth/login");
       toast.success(response.message);
     } catch (error) {
-      if (isAxiosError<ErrorResponse>(error)) {
-        toast.error(error.response?.data.details?.[0].message);
-      }
+      handleResponseError(error);
     }
   }
 
@@ -119,9 +113,7 @@ export function useAuthManagement() {
       });
       toast.success(response.message);
     } catch (error) {
-      if (isAxiosError<ErrorResponse>(error)) {
-        toast.error(error.response?.data.details?.[0].message);
-      }
+      handleResponseError(error);
     }
   }
 
@@ -144,9 +136,7 @@ export function useAuthManagement() {
       });
       toast.success(response?.message);
     } catch (error) {
-      if (isAxiosError<ErrorResponse>(error)) {
-        toast.error(error.response?.data.details?.[0].message);
-      }
+      handleResponseError(error);
     }
   }
 

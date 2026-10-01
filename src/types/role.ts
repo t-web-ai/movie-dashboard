@@ -4,7 +4,7 @@ export type RolesResponse = {
   success: true;
   message: string;
   data: {
-    roles: Omit<Role, "permissions">[];
+    roles: Role[];
   };
 };
 
@@ -12,15 +12,15 @@ export type RoleResponse = {
   success: true;
   message: string;
   data: {
-    role: Role;
+    role: Role & {
+      permissions: Permission[];
+    };
   };
 };
 
 export type Role = {
   _id: string;
   name: string;
-  permissions: Permission[];
-  type: "system" | "custom";
   createdAt: string;
   updatedAt: string;
 };

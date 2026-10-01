@@ -2,7 +2,7 @@ import z from "zod";
 
 export const LoginSchema = z.object({
   email: z.email().trim(),
-  password: z.string().trim().min(5),
+  password: z.string().trim().min(5, "Password must be at least 5 characters"),
 });
 
 export type LoginInput = z.infer<typeof LoginSchema>;

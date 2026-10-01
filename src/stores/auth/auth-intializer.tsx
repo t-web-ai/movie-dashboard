@@ -9,7 +9,7 @@ import { useAuthManagement } from "@/hooks/auth/use-auth-management";
 import { useAuthStore } from "@/hooks/auth/use-auth-store";
 import { useProfileManagement } from "@/hooks/auth/use-profile-management";
 import { useSessionStore } from "@/hooks/auth/use-session-store";
-import { useGetRoleQuery } from "@/queries/role/use-get-role-query";
+import { useGetAllPermissionsQuery } from "@/queries/permission/use-get-all-permissions-query";
 export function AuthInitializer() {
   const { logoutAdmin } = useAuthManagement();
 
@@ -25,7 +25,7 @@ export function AuthInitializer() {
   const { setAdmin } = useAuthStore();
   const { admin, adminResponseLoading } = useProfileManagement();
 
-  useGetRoleQuery(admin?.role?._id);
+  useGetAllPermissionsQuery();
 
   useEffect(() => {
     if (!adminResponseLoading && admin) {
@@ -36,16 +36,15 @@ export function AuthInitializer() {
   if (!expired) return null;
 
   return createPortal(
-    <div style={{ zIndex: 100 }} className="fixed inset-0 flex items-center justify-center bg-black/80 p-4">
+    <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/10 p-4 supports-backdrop-filter:backdrop-blur-xs">
       <div className="w-full max-w-md overflow-hidden rounded-lg border border-white/10 bg-background shadow-2xl">
         <div className="flex flex-col gap-y-5 p-6">
           <div>
-            <h2 className="font-semibold text-xl tracking-tight">Session Expired</h2>
-
-            <p className="mt-2 text-muted-foreground text-sm">Please log in again</p>
+            <h2 className="font-medium text-base">Session Expired</h2>
+            <p className="mt-2 text-muted-foreground text-sm">Please log in again.</p>
           </div>
 
-          <Button variant="default" className="ml-auto w-fit" onClick={logoutAdmin}>
+          <Button style={{ marginTop: "15px" }} variant="outline" className="ml-auto w-fit" onClick={logoutAdmin}>
             OK
           </Button>
         </div>

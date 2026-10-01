@@ -4,7 +4,7 @@ import { getAdmin } from "@/services/admin-service";
 
 export function useGetAdminQuery(id?: string) {
   return useQuery({
-    queryKey: ["profile", id],
+    queryKey: ["admins", id],
     queryFn: () => {
       if (id) {
         return getAdmin(id);
