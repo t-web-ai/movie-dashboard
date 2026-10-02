@@ -4,7 +4,7 @@ export type RolesResponse = {
   success: true;
   message: string;
   data: {
-    roles: Role[];
+    roles: (Role & { type: "custom" | "system" })[];
   };
 };
 

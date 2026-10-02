@@ -18,7 +18,7 @@ const limitItems = [
   { id: 3, value: "10", label: "10" },
   { id: 4, value: "20", label: "20" },
   { id: 5, value: "30", label: "30" },
-  { id: 6, value: "50", label: "0" },
+  { id: 6, value: "50", label: "50" },
 ];
 
 export function PaginationFilter({
