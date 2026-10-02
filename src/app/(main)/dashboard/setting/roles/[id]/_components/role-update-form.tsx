@@ -37,7 +37,7 @@ export function RoleUpdateForm({ form, onSubmit, permissionsResponseLoading, per
     formState: { isSubmitting },
     reset,
   } = form;
-  const hasCreatePermission = useCheckPermission("role", "create");
+  const hasCreatePermission = useCheckPermission("role", "update");
   const { data: roleResponse, isLoading: roleResponseLoading } = useGetRoleQuery(id);
   const role = roleResponse?.data?.role;
 
