@@ -55,9 +55,8 @@ function EmailSettingSkelegon() {
               <Skeleton className="h-5 w-20" />
               <Skeleton className="h-10" />
             </div>
-            <div className="flex flex-col gap-y-2">
-              <Skeleton className="h-5 w-20" />
-              <Skeleton className="h-10" />
+            <div className="mt-4">
+              <Skeleton className="h-6 w-45" />
             </div>
           </div>
 

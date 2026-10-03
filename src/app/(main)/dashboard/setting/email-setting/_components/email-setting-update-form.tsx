@@ -1,9 +1,10 @@
 import { Controller, type UseFormReturn } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
 import { Spinner } from "@/components/ui/spinner";
 import { useCheckPermission } from "@/hooks/auth/use-check-permission";
 import type { EmailSettingUpdateInput } from "@/schemas/email-setting-schema";
@@ -105,21 +106,15 @@ export function EmailSettingUpdateForm({ onSubmit, form, isSubmitting }: EmailSe
           <Controller
             control={control}
             name="secure"
-            render={({ field, fieldState }) => (
-              <Field className="gap-1.5" data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor="secure">Use Secure Connection</FieldLabel>
-                <Select value={String(field.value)} onValueChange={(value) => field.onChange(value === "true")}>
-                  <SelectTrigger className="h-10! w-full" id="secure">
-                    <SelectValue placeholder="Select security option" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectItem value="true">Yes</SelectItem>
-                      <SelectItem value="false">No</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-                {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            render={({ field }) => (
+              <Field orientation="horizontal" className="mt-4">
+                <Checkbox
+                  id="terms-checkbox"
+                  name="terms-checkbox"
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+                <Label htmlFor="terms-checkbox">Use Secure Connection</Label>
               </Field>
             )}
           />
