@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import "nprogress/nprogress.css";
 
 import type { Metadata } from "next";
 

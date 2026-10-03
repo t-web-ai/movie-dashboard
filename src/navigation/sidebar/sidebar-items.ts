@@ -1,4 +1,4 @@
-import { LayoutDashboard, type LucideIcon, Settings, User, UserCheck, Users } from "lucide-react";
+import { LayoutDashboard, Logs, type LucideIcon, Settings, User, UserCheck, Users } from "lucide-react";
 
 export type NavBadge = "new" | "soon";
 
@@ -77,6 +77,12 @@ export const sidebarItems: NavGroup[] = [
             title: "Role",
             url: "/dashboard/setting/roles",
             icon: UserCheck,
+          },
+          {
+            id: "log",
+            title: "Log",
+            url: "/dashboard/setting/logs",
+            icon: Logs,
           },
         ],
       },
