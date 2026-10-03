@@ -16,19 +16,19 @@ export const AdminTableColumns: TableColumn<Admin>[] = [
   {
     label: "Name",
     render({ item }) {
-      return <div>{item.name}</div>;
+      return <div>{item?.name ?? "-"}</div>;
     },
   },
   {
     label: "Email",
     render({ item }) {
-      return <div>{item.email}</div>;
+      return <div>{item?.email ?? "-"}</div>;
     },
   },
   {
     label: "Role",
     render({ item }) {
-      return <div className="capitalize">{item.role.name}</div>;
+      return <div className="capitalize">{item?.role?.name ?? "-"}</div>;
     },
   },
   {
@@ -37,7 +37,7 @@ export const AdminTableColumns: TableColumn<Admin>[] = [
       return (
         <DotIcon
           className={cn("size-16 text-muted-foreground", {
-            "text-green-600": item.status === "active",
+            "text-green-600": item?.status === "active",
           })}
         />
       );
@@ -46,6 +46,7 @@ export const AdminTableColumns: TableColumn<Admin>[] = [
   {
     label: "Created At",
     render({ item }) {
+      if (!item?.createdAt) return "-";
       return (
         <div className="capitalize">
           {new Date(item.createdAt).toLocaleDateString("en-US", {
@@ -60,6 +61,7 @@ export const AdminTableColumns: TableColumn<Admin>[] = [
   {
     label: "Action",
     render({ item }) {
+      if (!item?._id) return null;
       return <AdminTableAction id={item._id} />;
     },
   },

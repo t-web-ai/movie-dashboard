@@ -61,6 +61,7 @@ export const LogTableColums: TableColumn<Log>[] = [
   {
     label: "Created At",
     render({ item }) {
+      if (!item?.createdAt) return "-";
       return (
         <div className="capitalize">
           {new Date(item.createdAt).toLocaleDateString("en-US", {
@@ -75,6 +76,7 @@ export const LogTableColums: TableColumn<Log>[] = [
   {
     label: "Actions",
     render({ item }) {
+      if (!item._id) return null;
       return <LogTableAction id={item._id} />;
     },
   },

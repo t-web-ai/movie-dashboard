@@ -13,18 +13,19 @@ export const RoleTableColumns: TableColumn<Role & { type: "custom" | "system" }>
   {
     label: "Name",
     render: ({ item }) => {
-      return <div>{item.name}</div>;
+      return <div>{item?.name ?? "-"}</div>;
     },
   },
   {
     label: "Type",
     render: ({ item }) => {
-      return <div className="capitalize">{item.type}</div>;
+      return <div className="capitalize">{item?.type || "-"}</div>;
     },
   },
   {
     label: "Created At",
     render({ item }) {
+      if (!item?.createdAt) return "-";
       return (
         <div className="capitalize">
           {new Date(item.createdAt).toLocaleDateString("en-US", {
@@ -39,6 +40,7 @@ export const RoleTableColumns: TableColumn<Role & { type: "custom" | "system" }>
   {
     label: "Actions",
     render: ({ item }) => {
+      if (!item?._id) return null;
       return <RoleTableAction id={item._id} type={item.type} />;
     },
   },
