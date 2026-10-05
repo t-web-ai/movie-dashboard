@@ -18,13 +18,13 @@ export function Breadcrumb({ items, currentPage }: BreadCrumbProps) {
       <BreadcrumbList>
         {items.map((item) => (
           <Fragment key={item}>
-            <BreadcrumbItem>
+            <BreadcrumbItem className="cursor-default">
               <span>{item}</span>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
           </Fragment>
         ))}
-        <BreadcrumbItem>
+        <BreadcrumbItem className="cursor-default">
           <BreadcrumbPage>{currentPage}</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>

@@ -50,7 +50,7 @@ export function AdminCreateForm({ onSubmit, form, roles, rolesResponseLoading }:
                   id="admin-name"
                   type="text"
                   placeholder="Enter your name"
-                  autoComplete="name"
+                  autoComplete="off"
                   aria-invalid={fieldState.invalid}
                   className="h-10"
                 />
@@ -70,7 +70,7 @@ export function AdminCreateForm({ onSubmit, form, roles, rolesResponseLoading }:
                   id="login-email"
                   type="email"
                   placeholder="Enter your email address"
-                  autoComplete="email"
+                  autoComplete="off"
                   aria-invalid={fieldState.invalid}
                   className="h-10"
                 />

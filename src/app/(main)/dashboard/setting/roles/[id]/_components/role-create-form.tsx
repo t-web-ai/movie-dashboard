@@ -60,7 +60,7 @@ export function RoleCreateForm({ form, onSubmit, permissionsResponseLoading, per
                   id="role-name"
                   type="text"
                   placeholder="Enter role name"
-                  autoComplete="name"
+                  autoComplete="off"
                   aria-invalid={fieldState.invalid}
                   className="h-10"
                 />

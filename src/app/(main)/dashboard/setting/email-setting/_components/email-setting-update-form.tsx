@@ -1,11 +1,11 @@
 import { Controller, type UseFormReturn } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Spinner } from "@/components/ui/spinner";
+import { Switch } from "@/components/ui/switch";
 import { useCheckPermission } from "@/hooks/auth/use-check-permission";
 import type { EmailSettingUpdateInput } from "@/schemas/email-setting-schema";
 
@@ -16,7 +16,7 @@ interface EmailSettingUpdateFormProps {
 }
 
 export function EmailSettingUpdateForm({ onSubmit, form, isSubmitting }: EmailSettingUpdateFormProps) {
-  const { control } = form;
+  const { control, reset } = form;
   const hasUpdatePermission = useCheckPermission("email-setting", "update");
   return (
     <div className="w-full space-y-6">
@@ -35,6 +35,7 @@ export function EmailSettingUpdateForm({ onSubmit, form, isSubmitting }: EmailSe
                   placeholder="e.g. smtp.gmail.com"
                   aria-invalid={fieldState.invalid}
                   className="h-10"
+                  autoComplete="off"
                 />
                 {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
               </Field>
@@ -51,7 +52,7 @@ export function EmailSettingUpdateForm({ onSubmit, form, isSubmitting }: EmailSe
                   {...field}
                   onChange={(event) => {
                     const value = Number(event.target.value);
-                    const number = Math.max(Number.isNaN(value) ? 0 : value, 0);
+                    const number = Math.abs(Number.isNaN(value) ? 0 : value);
                     field.onChange(number);
                   }}
                   id="port"
@@ -59,6 +60,7 @@ export function EmailSettingUpdateForm({ onSubmit, form, isSubmitting }: EmailSe
                   placeholder="e.g. 587"
                   aria-invalid={fieldState.invalid}
                   className="h-10"
+                  autoComplete="off"
                 />
                 {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
               </Field>
@@ -78,6 +80,7 @@ export function EmailSettingUpdateForm({ onSubmit, form, isSubmitting }: EmailSe
                   placeholder="Enter email address"
                   aria-invalid={fieldState.invalid}
                   className="h-10"
+                  autoComplete="off"
                 />
                 {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
               </Field>
@@ -97,6 +100,7 @@ export function EmailSettingUpdateForm({ onSubmit, form, isSubmitting }: EmailSe
                   placeholder="Enter authentication password"
                   aria-invalid={fieldState.invalid}
                   className="h-10"
+                  autoComplete="off"
                 />
                 {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
               </Field>
@@ -107,20 +111,24 @@ export function EmailSettingUpdateForm({ onSubmit, form, isSubmitting }: EmailSe
             control={control}
             name="secure"
             render={({ field }) => (
-              <Field orientation="horizontal" className="mt-4">
-                <Checkbox
-                  id="terms-checkbox"
-                  name="terms-checkbox"
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
-                <Label htmlFor="terms-checkbox">Use Secure Connection</Label>
-              </Field>
+              <div className="mt-4 flex items-center space-x-2">
+                <Label htmlFor="secure-connection">Secure Connection</Label>
+                <Switch id="secure-connection" checked={field.value} onCheckedChange={field.onChange} />
+              </div>
             )}
           />
         </FieldGroup>
 
-        <div className="flex justify-end">
+        <div className="flex items-center justify-end gap-x-2">
+          <Button
+            type="reset"
+            onClick={() => reset({})}
+            variant="outline"
+            className="h-10 w-20 font-medium"
+            disabled={isSubmitting}
+          >
+            Reset
+          </Button>
           <Button type="submit" className="h-10 min-w-40 font-medium" disabled={isSubmitting || !hasUpdatePermission}>
             {isSubmitting ? <Spinner /> : "Save Changes"}
           </Button>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { UserCog } from "lucide-react";
 import { Controller, type UseFormReturn } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
@@ -42,10 +43,10 @@ export function RoleUpdateForm({ form, onSubmit, permissionsResponseLoading, per
   const role = roleResponse?.data?.role;
 
   useEffect(() => {
-    if (permissions && !permissionsResponseLoading && role && !roleResponseLoading) {
+    if (permissions && !permissionsResponseLoading && !roleResponseLoading) {
       setMounted(true);
     }
-  }, [permissions, permissionsResponseLoading, role, roleResponseLoading]);
+  }, [permissions, permissionsResponseLoading, roleResponseLoading]);
 
   useEffect(() => {
     if (role && !roleResponseLoading) {
@@ -58,6 +59,14 @@ export function RoleUpdateForm({ form, onSubmit, permissionsResponseLoading, per
   }, [role, roleResponseLoading, reset]);
 
   if (!mounted || !permissions) return <RoleUpdateSkeleton />;
+
+  if (!role)
+    return (
+      <div className="flex h-[50dvh] flex-col items-center justify-center gap-2 p-5">
+        <UserCog size={80} className="text-muted-foreground" />
+        <div className="shrink-0 text-sm">Not Found</div>
+      </div>
+    );
 
   return (
     <div className="w-full space-y-6">
@@ -74,7 +83,7 @@ export function RoleUpdateForm({ form, onSubmit, permissionsResponseLoading, per
                   id="role-name"
                   type="text"
                   placeholder="Enter role name"
-                  autoComplete="name"
+                  autoComplete="off"
                   aria-invalid={fieldState.invalid}
                   className="h-10"
                 />

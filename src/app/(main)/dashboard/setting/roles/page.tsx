@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import { UserCog } from "lucide-react";
+
 import { Skeleton } from "@/components/ui/skeleton";
 import { useRoleManagment } from "@/hooks/role/use-role-management";
 
@@ -60,6 +62,12 @@ export default function Page() {
             <TableComponent items={roles} headers={RoleTableColumns} />
             <RoleDeleteModal deleteId={deleteId} />
           </RoleActionContextProvider>
+        </div>
+      )}
+      {!roles?.length && (
+        <div className="flex h-[50dvh] flex-col items-center justify-center gap-2 p-5">
+          <UserCog size={80} className="text-muted-foreground" />
+          <div className="shrink-0 text-sm">Not Found</div>
         </div>
       )}
     </div>

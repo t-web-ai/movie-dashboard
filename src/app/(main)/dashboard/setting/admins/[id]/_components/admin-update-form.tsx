@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { Lock } from "lucide-react";
+import { Lock, User } from "lucide-react";
 import { Controller, type UseFormReturn } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
@@ -49,12 +49,19 @@ export function AdminUpdateForm({ onSubmit, form, roles, rolesResponseLoading, i
   }, [adminResponseLoading, admin, reset]);
 
   useEffect(() => {
-    if (admin && !adminResponseLoading && roles && !rolesResponseLoading) {
+    if (!adminResponseLoading && roles && !rolesResponseLoading) {
       setMounted(true);
     }
-  }, [admin, adminResponseLoading, roles, rolesResponseLoading]);
+  }, [adminResponseLoading, roles, rolesResponseLoading]);
 
   if (!mounted) return <AdminUpdateFormSkeleton />;
+  if (!admin)
+    return (
+      <div className="flex h-[50dvh] flex-col items-center justify-center gap-2 p-5">
+        <User size={80} className="text-muted-foreground" />
+        <div className="shrink-0 text-sm">Not Found</div>
+      </div>
+    );
   return (
     <div className="w-full space-y-6">
       <form noValidate onSubmit={onSubmit} className="space-y-6">
@@ -70,7 +77,7 @@ export function AdminUpdateForm({ onSubmit, form, roles, rolesResponseLoading, i
                   id="admin-name"
                   type="text"
                   placeholder="Enter your name"
-                  autoComplete="name"
+                  autoComplete="off"
                   aria-invalid={fieldState.invalid}
                   className="h-10"
                 />
@@ -90,7 +97,7 @@ export function AdminUpdateForm({ onSubmit, form, roles, rolesResponseLoading, i
                   id="login-email"
                   type="email"
                   placeholder="Enter your email address"
-                  autoComplete="email"
+                  autoComplete="off"
                   aria-invalid={fieldState.invalid}
                   className="h-10"
                 />

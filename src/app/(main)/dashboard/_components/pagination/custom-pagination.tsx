@@ -34,7 +34,7 @@ export function CustomPagination({
       containerClassName="flex items-center gap-3"
       pageClassName="flex text-sm items-center"
       pageLinkClassName="px-3 py-1 cursor-pointer"
-      activeClassName="font-medium"
+      activeClassName="font-semibold"
       disabledClassName="opacity-50"
       previousClassName="inline-flex items-center cursor-pointer"
       nextClassName="inline-flex items-center cursor-pointer"
