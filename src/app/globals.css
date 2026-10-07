@@ -301,3 +301,28 @@ html:has([data-landing-page]) {
     -webkit-print-color-adjust: exact;
   }
 }
+
+/* applies to the editor, and to its popups/dialogs that get the same theme class */
+.jodit_theme_dark {
+  --jodit-color-background-default: var(--background);
+  --jodit-color-background-light-gray: var(--card);
+  --jodit-color-panel: var(--card);
+  --jodit-color-text: var(--foreground);
+  --jodit-color-border: var(--border);
+}
+
+/* fallback in case the variables above don't cover everything */
+.jodit-container.jodit_theme_dark,
+.jodit-container.jodit_theme_dark .jodit-workplace,
+.jodit-container.jodit_theme_dark .jodit-wysiwyg,
+.jodit-container.jodit_theme_dark .jodit-status-bar {
+  background: var(--background);
+  color: var(--foreground);
+  border-color: var(--border);
+}
+
+.jodit-container.jodit_theme_dark .jodit-toolbar__box,
+.jodit-container.jodit_theme_dark .jodit-toolbar-editor-collection {
+  background: var(--card);
+  border-color: var(--border);
+}

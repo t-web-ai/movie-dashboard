@@ -71,7 +71,7 @@ export function LogHeader({
               key={typeItem.id}
               variant="outline"
               className={cn("cursor-pointer", {
-                "bg-green-700 text-white": type === typeItem.value,
+                "bg-green-700 text-white dark:bg-green-700": type === typeItem.value,
               })}
               onClick={() => handleType(typeItem.value)}
             >
