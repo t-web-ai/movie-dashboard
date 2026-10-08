@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import type { DateRange } from "react-day-picker";
 import { toast } from "sonner";
 
 import { useDeleteAllLogsMutation } from "@/queries/log/use-delete-all-logs-mutation";
@@ -16,6 +17,17 @@ export function useLogManagement() {
   const [role, setRole] = useState<string>("all");
   const [deboundSearch, setDeboundSearch] = useState<string>("");
   const [type, setType] = useState<"user" | "audit">("user");
+  const [createdBefore, setCreatedBefore] = useState<string>("");
+  const [createdAfter, setCreatedAfter] = useState<string>("");
+
+  function handleDate(dateRange?: DateRange) {
+    if (dateRange?.from) {
+      setCreatedAfter(dateRange.from.toDateString());
+    }
+    if (dateRange?.to) {
+      setCreatedBefore(dateRange.to.toDateString());
+    }
+  }
 
   const [deleteLogType, setDeleteLogType] = useState<"user" | "audit" | undefined>();
 
@@ -73,6 +85,8 @@ export function useLogManagement() {
     setSearch("");
     setDeboundSearch("");
     setRole("all");
+    setCreatedAfter("");
+    setCreatedBefore("");
   }
 
   const { data: logsResponse, isLoading: logsResponseLoading } = useGetAllLogsQuery({
@@ -81,6 +95,8 @@ export function useLogManagement() {
     search: deboundSearch ? deboundSearch : undefined,
     role: role !== "all" ? role : undefined,
     type,
+    createdBefore: createdBefore ? createdBefore : undefined,
+    createdAfter: createdAfter ? createdAfter : undefined,
   });
   const logs = logsResponse?.data?.logs;
   const logsPaginaton = logsResponse?.data?.pagination;
@@ -131,6 +147,9 @@ export function useLogManagement() {
     totalPages,
     foundCount,
     totalCount,
+    createdAfter,
+    createdBefore,
+    handleDate,
     handlePage,
     handleLimit,
     handleSearch,

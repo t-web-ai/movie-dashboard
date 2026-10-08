@@ -1,5 +1,7 @@
 import { cn } from "cn";
+import type { DateRange } from "react-day-picker";
 
+import { DateRangePicker } from "@/components/date-range-picker";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -13,6 +15,9 @@ interface LogHeaderProps {
   handleType: (type: "user" | "audit") => void;
   search: string;
   handleSearch: (search: string) => void;
+  createdAfter: string;
+  createdBefore: string;
+  handleDate: (dateRange?: DateRange) => void;
   roleItems?: Role[];
   role: string;
   handleRole: (role: string) => void;
@@ -38,6 +43,9 @@ export function LogHeader({
   handleType,
   search,
   handleSearch,
+  createdAfter,
+  createdBefore,
+  handleDate,
   role,
   handleRole,
   roleItems,
@@ -105,6 +113,15 @@ export function LogHeader({
             onChange={(event) => {
               handleSearch(event.target.value.trim());
             }}
+          />
+        </div>
+        <div>
+          <DateRangePicker
+            value={{
+              from: createdAfter ? new Date(createdAfter) : undefined,
+              to: createdBefore ? new Date(createdBefore) : undefined,
+            }}
+            onChange={handleDate}
           />
         </div>
       </div>

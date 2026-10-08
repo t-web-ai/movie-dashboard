@@ -22,6 +22,9 @@ export default function Page() {
     handleType,
     search,
     handleSearch,
+    createdAfter,
+    createdBefore,
+    handleDate,
     role,
     handleRole,
     roles,
@@ -84,6 +87,7 @@ export default function Page() {
             <Skeleton className="h-10 w-full" />
             <Skeleton className="h-10 w-full" />
             <Skeleton className="h-10 w-full" />
+            <Skeleton className="h-10 w-full" />
           </div>
           <TableSkeleton rowCount={limit} columnCount={11} />
           <div className="flex justify-between">
@@ -102,6 +106,9 @@ export default function Page() {
         handleType={handleType}
         search={search}
         handleSearch={handleSearch}
+        createdAfter={createdAfter}
+        createdBefore={createdBefore}
+        handleDate={handleDate}
         role={role}
         handleRole={handleRole}
         roleItems={roles}

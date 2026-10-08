@@ -7,6 +7,8 @@ export type GetAllLogsParams = {
   role?: string;
   page?: number;
   limit?: number;
+  createdBefore?: string;
+  createdAfter?: string;
 };
 
 export type DeleteAllLogsParams = {
