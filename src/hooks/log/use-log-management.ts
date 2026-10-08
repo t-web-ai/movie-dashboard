@@ -99,11 +99,11 @@ export function useLogManagement() {
     createdAfter: createdAfter ? createdAfter : undefined,
   });
   const logs = logsResponse?.data?.logs;
-  const logsPaginaton = logsResponse?.data?.pagination;
+  const logsPagination = logsResponse?.data?.pagination;
 
-  const totalPages = logsPaginaton?.totalPages ?? 0;
-  const foundCount = logsPaginaton?.foundCount ?? 0;
-  const totalCount = logsPaginaton?.totalCount ?? 0;
+  const totalPages = logsPagination?.totalPages ?? 0;
+  const foundCount = logsPagination?.foundCount ?? 0;
+  const totalCount = logsPagination?.totalCount ?? 0;
 
   const { roles, rolesResponseLoading } = useRoleManagment();
 

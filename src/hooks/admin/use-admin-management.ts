@@ -104,11 +104,11 @@ export function useAdminManagement() {
   });
 
   const admins = adminsResponse?.data?.admins;
-  const adminsPaginaton = adminsResponse?.data?.pagination;
+  const adminsPagination = adminsResponse?.data?.pagination;
 
-  const totalPages = adminsPaginaton?.totalPages ?? 0;
-  const foundCount = adminsPaginaton?.foundCount ?? 0;
-  const totalCount = adminsPaginaton?.totalCount ?? 0;
+  const totalPages = adminsPagination?.totalPages ?? 0;
+  const foundCount = adminsPagination?.foundCount ?? 0;
+  const totalCount = adminsPagination?.totalCount ?? 0;
 
   const { roles, rolesResponseLoading } = useRoleManagment();
 
@@ -184,7 +184,6 @@ export function useAdminManagement() {
 
     admins,
     adminsResponseLoading,
-    adminsPaginaton,
 
     page,
     limit,
