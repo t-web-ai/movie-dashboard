@@ -121,8 +121,8 @@ export function EmailSettingUpdateForm({ onSubmit, form, isSubmitting }: EmailSe
 
         <div className="flex items-center justify-end gap-x-2">
           <Button
-            type="reset"
-            onClick={() => reset({})}
+            type="button"
+            onClick={() => reset()}
             variant="outline"
             className="h-10 w-20 font-medium"
             disabled={isSubmitting}
