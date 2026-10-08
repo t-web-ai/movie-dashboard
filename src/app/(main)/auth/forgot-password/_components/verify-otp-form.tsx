@@ -37,7 +37,7 @@ export function VerifyOTPForm({ onSubmit, control, isSubmitting, timer, closeFor
                 id="otp-code"
                 type="text"
                 placeholder="546876"
-                autoComplete="one-time-code"
+                autoComplete="off"
                 aria-invalid={fieldState.invalid}
               />
 

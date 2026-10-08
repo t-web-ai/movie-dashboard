@@ -168,7 +168,7 @@ export function AdminUpdateForm({ onSubmit, form, roles, rolesResponseLoading, i
                     id="login-password"
                     type="password"
                     placeholder="*****"
-                    autoComplete="new-password"
+                    autoComplete="off"
                     aria-invalid={fieldState.invalid}
                     className="h-10 pr-9"
                   />

@@ -50,7 +50,7 @@ export function LoginForm() {
                 id="login-password"
                 type="password"
                 placeholder="********"
-                autoComplete="current-password"
+                autoComplete="off"
                 aria-invalid={fieldState.invalid}
               />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
