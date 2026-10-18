@@ -37,7 +37,7 @@ export default function Page() {
   if (!mounted)
     return (
       <div>
-        <div className="flex flex-wrap items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <Skeleton className="h-8 w-50" />
           <div className="flex gap-2">
             <Skeleton className="h-8 w-30" />

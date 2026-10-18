@@ -71,7 +71,7 @@ export function TestEmailSettingForm({ onSubmit, form, isSubmitting }: TestEmail
             control={control}
             name="html"
             render={({ field, fieldState }) => (
-              <Field className="col-span-2 gap-1.5" data-invalid={fieldState.invalid}>
+              <Field className="gap-1.5 sm:col-span-2" data-invalid={fieldState.invalid}>
                 <FieldLabel htmlFor="html">Email Content</FieldLabel>
                 <Textarea
                   {...field}
@@ -110,7 +110,7 @@ function TestEmailSettingFormSkeleton() {
             <Skeleton className="h-10" />
           </div>
 
-          <div className="col-span-2 flex flex-col gap-y-2">
+          <div className="flex flex-col gap-y-2 sm:col-span-2">
             <Skeleton className="h-5 w-20" />
             <Skeleton className="h-20" />
           </div>

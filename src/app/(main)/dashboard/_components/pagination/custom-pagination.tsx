@@ -12,7 +12,7 @@ export function CustomPagination({
 }) {
   return (
     <ReactPaginate
-      breakLabel="..."
+      breakLabel=".."
       nextLabel={
         <div className="cursor-pointer">
           <ChevronRight className="size-5" />
@@ -27,13 +27,13 @@ export function CustomPagination({
         handlePageChange(selected + 1);
       }}
       pageRangeDisplayed={1}
-      marginPagesDisplayed={2}
+      marginPagesDisplayed={1}
       pageCount={totalPages}
       renderOnZeroPageCount={null}
       forcePage={Math.min(Math.max(0, page - 1), totalPages - 1)}
-      containerClassName="flex items-center gap-3"
+      containerClassName="flex items-center gap-1.5"
       pageClassName="flex text-sm items-center"
-      pageLinkClassName="px-3 py-1 cursor-pointer"
+      pageLinkClassName="px-2 py-1 cursor-pointer"
       activeClassName="font-semibold"
       disabledClassName="opacity-50"
       previousClassName="inline-flex items-center cursor-pointer"

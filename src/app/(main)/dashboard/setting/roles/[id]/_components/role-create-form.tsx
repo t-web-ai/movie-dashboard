@@ -92,7 +92,7 @@ export function RoleCreateForm({ form, onSubmit, permissionsResponseLoading, per
               return (
                 <Field>
                   <div className="w-full space-y-6">
-                    <div className="flex gap-x-2">
+                    <div className="flex flex-wrap gap-2">
                       <Button
                         type="button"
                         onClick={() => {
@@ -124,7 +124,7 @@ export function RoleCreateForm({ form, onSubmit, permissionsResponseLoading, per
                             key={resource}
                             className="flex flex-col justify-between rounded-xl border bg-card p-4 text-card-foreground shadow-xs transition-colors hover:border-muted-foreground/30"
                           >
-                            <div className="mb-3 flex items-center justify-between">
+                            <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
                               <span className="font-medium text-foreground/90 capitalize">{resource}</span>
                               <span className="flex gap-x-2 text-muted-foreground text-xs">
                                 <span>
@@ -199,7 +199,7 @@ function RoleCreateSkeleton() {
 
           <div>
             <div className="w-full space-y-6">
-              <div className="flex gap-x-2">
+              <div className="flex flex-wrap gap-2">
                 <Skeleton className="h-10 w-40" />
                 <Skeleton className="h-10 w-40" />
               </div>
@@ -212,7 +212,7 @@ function RoleCreateSkeleton() {
                       key={key}
                       className="flex flex-col justify-between rounded-xl border bg-card p-4 text-card-foreground shadow-xs transition-colors hover:border-muted-foreground/30"
                     >
-                      <div className="mb-3 flex items-center justify-between">
+                      <div className="mb-3 flex flex-wrap items-center justify-between gap-y-2.5">
                         <Skeleton className="h-7 w-30" />
                         <Skeleton className="h-7 w-20" />
                       </div>

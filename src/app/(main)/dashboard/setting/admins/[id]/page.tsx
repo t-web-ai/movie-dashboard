@@ -21,7 +21,7 @@ export default function Page() {
 
   return (
     <div className="mx-auto flex flex-col gap-4">
-      <div className="flex flex-wrap items-center justify-between gap-y-4">
+      <div className="flex flex-wrap items-center justify-between gap-4">
         <Button
           variant={"outline"}
           onClick={() => router.push("/dashboard/setting/admins")}
