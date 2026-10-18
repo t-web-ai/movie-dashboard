@@ -12,7 +12,7 @@ interface RoleHeaderProps {
 export function RoleHeader({ openCreateRolePage }: RoleHeaderProps) {
   const hasCreatePermission = useCheckPermission("role", "create");
   return (
-    <div className="flex flex-wrap items-center justify-between">
+    <div className="flex flex-wrap items-center justify-between gap-2">
       <Breadcrumb items={["Setting"]} currentPage="Role Management" />
       <div className="flex gap-2">
         <Button onClick={openCreateRolePage} disabled={!hasCreatePermission}>

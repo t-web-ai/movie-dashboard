@@ -31,15 +31,15 @@ export function PaginationFilter({
   totalCount,
 }: PaginationFilterProps) {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex flex-wrap items-center justify-between gap-2">
       <div>
         <CustomPagination totalPages={totalPages} page={page} handlePageChange={handlePage} />
       </div>
-      <div className="text-sm">
+      <div className="hidden text-sm sm:block">
         {foundCount} of {totalCount}
       </div>
       <div className="flex items-center gap-4">
-        <div className="text-sm">Page Size</div>
+        <div className="hidden text-sm sm:block">Page Size</div>
         <div>
           <Select value={limit.toString()} onValueChange={(value) => handleLimit(parseInt(value, 10))}>
             <SelectTrigger className="h-10 w-full" id="admin-status">

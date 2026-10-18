@@ -75,14 +75,15 @@ export default function Page() {
   if (!mounted)
     return (
       <div className="flex flex-col gap-2">
-        <div className="flex flex-wrap items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <Skeleton className="h-8 w-50" />
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
+            <Skeleton className="h-8 w-30" />
             <Skeleton className="h-8 w-30" />
           </div>
         </div>
         <div>
-          <div className="flex gap-4">
+          <div className="flex gap-2">
             <Skeleton className="h-10 w-full" />
             <Skeleton className="h-10 w-full" />
             <Skeleton className="h-10 w-full" />
