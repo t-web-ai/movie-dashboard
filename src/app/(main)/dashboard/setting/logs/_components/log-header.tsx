@@ -111,7 +111,7 @@ export function LogHeader({
             id="search"
             value={search}
             onChange={(event) => {
-              handleSearch(event.target.value.trim());
+              handleSearch(event.target.value);
             }}
           />
         </div>
