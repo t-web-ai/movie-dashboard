@@ -63,7 +63,7 @@ export function useLogManagement() {
   }
   useEffect(() => {
     const timer = setTimeout(() => {
-      setDeboundSearch(search);
+      setDeboundSearch(search.trim());
       setPage(1);
     }, 500);
     return () => clearTimeout(timer);
